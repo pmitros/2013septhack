@@ -18,9 +18,9 @@ else:
 
 def generate_course_name():
     universities = ["MIT", "Harvard", "Berkeley", "Stanford", "IIT", "Udacity", "Kaplan"]
-    prefixes = ["Introductory", "Advanced", "Seminar on", "Quantum", "Computational", "Freshman", "Australian", "Ethics of"]
-    courses = ["Chemistry", "Physics", "Biology", "Informatics", "Computation", "Poetry", "Philosophy", "Agriculture", "Anatomy", "Electrophysiology", "Hackery", "Learning Sciences", "Mechanical Engineering", "UX Design", "Architecture", "Computer Architecture", "History", "Marketing", "Business Law", "Military Strategy", "Foreign Relations"]
-    suffixes = ["", "for Dummies", "for Inner City Youth", "On-Line Edition", "with Applications", "with Honors", "for the Determined", "Night School"]
+    prefixes = ["Introductory", "Advanced", "Seminar on", "Quantum", "Computational", "Freshman", "Traditional Australian Mystic", "Ethics of"]
+    courses = ["Chemistry", "Physics", "Biology", "Informatics", "Computation", "Poetry", "Philosophy", "Agriculture", "Anatomy", "Electrophysiology", "Hackery", "Learning Sciences", "Mechanical Engineering", "UX Design", "Architecture", "Computer Architecture", "History", "Marketing", "Business Law", "Military Strategy", "Foreign Relations", "Attachment Therapy", "Conversion Therapy", "Graphology", "Hypontherapy", "Memetics", "Neurolinguistic Programming", "Parasychology", "Alchemy", "Phrenology", "Dianetics"]
+    suffixes = ["", "for Dummies", "for Inner City Youth", "On-Line Edition", "with Applications", "with Honors", "for the Determined", "Night School for Executives"]
 
     n = list(itertools.product(universities, prefixes, courses, suffixes))
     random.shuffle(n)
