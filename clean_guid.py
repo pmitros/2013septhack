@@ -12,7 +12,7 @@ else:
         n.add(names.get_full_name())
     n = list(n)
     random.shuffle(n)
-    f = open("names.txt","w")
+    f = open("names.txt", "w")
     f.writelines(n)
     f.close()
 
@@ -24,7 +24,7 @@ suffixes = ["", "for Dummies", "for Inner City Youth", "On-Line Edition", "with 
 n = itertools.product()
 random.shuffle(n)
 
-with open('../SakaiEvents.csv', 'rb') as csvfile:
+with open("../SakaiEvents.csv", "rb") as csvfile:
     reader = csv.reader(csvfile, delimiter=",")
     for row in reader:
         pass
