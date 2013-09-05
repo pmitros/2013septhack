@@ -1,11 +1,12 @@
 # ~6000 users
 # ~800 courses
 
-import csv, itertools, random, names, os.path
+import csv, itertools, random, os.path
 
 if os.path.exists("names.txt"):
     n = open("names.txt").readlines()
 else: 
+    import names
     n = set()
     while len(n) < 6000:
         n.add(names.get_full_name())
