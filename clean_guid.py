@@ -5,7 +5,7 @@ import csv, itertools, random, os.path
 
 if os.path.exists("names.txt"):
     n = open("names.txt").readlines()
-else: 
+else:
     import names
     n = set()
     while len(n) < 6000:
