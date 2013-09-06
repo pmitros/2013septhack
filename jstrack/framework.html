@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Client-Side Tracking Framework</title>
+ </head>
+    <body>
+
+<script type="text/javascript">
+function xEventTrack(event_type, event)
+{
+  // event_type is a dot-separate ID for the event. First field should be organization whose code is generating the event. 
+  // E.g. edx.video_player.pause_video
+  // event is a JSON dictionary with detailed event information
+  // E.g. { 'action' : 'pause_video', 'video_time' : '0:02:23', source : 'spacebar' }
+  var myEvent = new CustomEvent("xeventtrack", {'detail':{'event_type': event_type, 'event':event}});
+  document.dispatchEvent(myEvent);
+}
+
+document.addEventListener('xeventtrack', function(e) {
+   console.info("Event is: ", e);
+   console.info("Custom data is: ", JSON.stringify(e.detail));
+});
+</script>
+
+ </body>
+</html>
