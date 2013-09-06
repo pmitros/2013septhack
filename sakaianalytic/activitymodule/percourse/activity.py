@@ -1,4 +1,5 @@
 import sys
+import json
 
 from edinsights.core.decorators import event_handler, view, query
 
@@ -31,5 +32,6 @@ def plot_histogram(mongodb):
     return histogram
 
 @view()
-def plot_histogram():
-    pass
+def plot_histogram(query):
+    from edinsights.core.render import render
+    return render("courseviews.html", {'data':json.dumps(query.plot_histogram())})
