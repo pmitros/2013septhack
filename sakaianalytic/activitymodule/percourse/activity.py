@@ -1,6 +1,6 @@
 import sys
 
-from edinsights.core.decorators import event_handler
+from edinsights.core.decorators import event_handler, view, query
 
 @event_handler()
 def dump_to_db(mongodb, events):
@@ -22,4 +22,7 @@ def histogram(mongodb, events):
                               False)
             print "Got a message", evt
             
-    pass
+@view()
+def plot_histogram(mongodb):
+    histogram = list(mongodb['course_activity'].find())
+    return str(histogram)
