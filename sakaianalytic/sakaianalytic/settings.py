@@ -17,6 +17,7 @@ DJ_REQUIRED_APPS = ( 'djeventstream.httphandler',
     'south',
     'edinsights.core',
     'edinsights.modulefs',
+    'activitymodule',
 #    'modules',
 )
 
@@ -31,7 +32,7 @@ DJFS = { 'type' : 'osfs',
 
 #TIME_BETWEEN_DATA_REGENERATION = datetime.timedelta(minutes=1)
 
-INSTALLED_ANALYTICS_MODULES = []#'modules.dump_to_db'] #'modules.testmodule',)
+INSTALLED_ANALYTICS_MODULES = ['activitymodule.percourse']#'modules.dump_to_db'] #'modules.testmodule',)
 
 #print INSTALLED_ANALYTICS_MODULES
 

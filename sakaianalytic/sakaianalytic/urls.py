@@ -5,6 +5,7 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^httpevent$', 'djeventstream.httphandler.views.http_view'),
     # Examples:
     # url(r'^$', 'sakaianalytic.views.home', name='home'),
     # url(r'^sakaianalytic/', include('sakaianalytic.foo.urls')),
@@ -16,4 +17,4 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 )
 
-#import edinsights.core.views
+import edinsights.core.views
