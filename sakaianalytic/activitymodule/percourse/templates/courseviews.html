@@ -1,6 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-Course views: 
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Events per course</title>
+    <script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script>
+ </head>
+    <body>
+    <h1>Events per course</h1>
 
-${data}
+    <div id="placeholder" style="width:600px;height:300px;"></div>
 
+    <p>Events per Sakai course.</p>
+
+<script type="text/javascript">
+$(function () {
+    var d1 = [];
+    var data = ${data};
+    for (var i = 0; i < data.length; i += 1)
+        d1.push([i, data[i]['count']]);
+
+    $.plot($("#placeholder"), [ d1 ]);
+});
+</script>
+
+ </body>
 </html>
