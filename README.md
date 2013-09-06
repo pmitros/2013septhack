@@ -7,3 +7,6 @@ clean_guid.py: Take anonymized Sakai logs, and re-identify them with
 
 send_eventy.py: Send Sakai events to Insights. 
 
+sakaianalytic: An Insights server which consumes Sakai events sent
+  with send_event.py.
+
