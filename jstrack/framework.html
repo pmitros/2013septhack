@@ -3,6 +3,7 @@
  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Client-Side Tracking Framework</title>
+    <script src="tincan.js"></script
  </head>
     <body>
 
@@ -10,10 +11,10 @@
 function xEventTrack(event_type, event)
 {
   // event_type is a dot-separate ID for the event. First field should be organization whose code is generating the event. 
-  // E.g. edx.video_player.pause_video
+  // E.g. edx.video
   // event is a JSON dictionary with detailed event information
   // E.g. { 'action' : 'pause_video', 'video_time' : '0:02:23', source : 'spacebar' }
-  var myEvent = new CustomEvent("xeventtrack", {'detail':{'event_type': event_type, 'event':event}});
+  var myEvent = new CustomEvent("xeventtrack", {'detail':{'event_type': event_type, 'event':event, 'version' : '0.01'}});
   document.dispatchEvent(myEvent);
 }
 
@@ -22,7 +23,37 @@ document.addEventListener('xeventtrack', function(e) {
    console.info("Custom data is: ", JSON.stringify(e.detail));
 });
 
-xEventTrack('edx.video', {'pause':1, 'time':"3:47"})
+document.addEventListener('xeventtrack', function(e) {
+   var tincan = new TinCan (
+      {
+          recordStores: [
+              {
+                  endpoint: "http://cloud.scorm.com/ScormEngineInterface/TCAPI/public/",
+                  username: "test",
+                  password: "test"
+              }
+          ]
+      }
+    );
+
+    tincan.sendStatement(
+        {
+            actor: {
+                mbox: "mailto:fake@fake.com" // Actor should be added server-side, since the server has proper auth. 
+            },
+            verb: {
+                  id: "http://data.edx.org/", 
+                  display: {"en-US":e.toString()}
+            },
+            target: {
+                id: "http://rusticisoftware.github.com/TinCanJS"
+            },
+            context: e.detail // TODO: Figure out why this is not sent
+        }
+    );
+});
+
+xEventTrack('edx.video', {'pause':1, 'time':"3:47", 'source':'spacebar'})
 </script>
 
  </body>
