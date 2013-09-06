@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Events per event type</title>
+    <script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        #flot-tooltip {
+            font-size: 12px;
+            position: absolute;
+            display: none;
+            border: 2px solid;
+            padding: 2px;
+            background-color: #FFF;
+            opacity: 0.8;
+            border-radius: 5px;
+        }
+    </style>
+
+ </head>
+    <body>
+    <h1>Events per event type</h1>
+
+    <div id="placeholder" style="width:1200px;height:300px;"></div>
+
+    <p>Events per Sakai event type.</p>
+
+<script type="text/javascript">
+    function showTooltip(x, y, event_type, count) {
+        $('<div id="flot-tooltip">' + event_type + ' ' + count + '</div>').css({
+            top: y - 20,
+            left: x,
+        }).appendTo("body").show();
+    }    
+
+    $(function () {
+        var d1 = [];
+        var data = ${data};
+        for (var i = 0; i < data.length; i += 1)
+            d1.push([i, data[i]['count']]);
+
+        $.plot($("#placeholder"), 
+            [
+                {data: d1, bars: {show: true}}
+            ], {
+                grid: {hoverable: true}
+            }
+        );
+        var previousPoint = null;
+        $("#placeholder").bind("plothover", function (event, pos, item) {
+            if (item) {
+                if (previousPoint != item.datapoint) {
+                    previousPoint = item.datapoint;
+                    $("#flot-tooltip").remove();
+                    showTooltip(item.pageX, item.pageY, data[item.datapoint[0]].event_type, item.datapoint[1]);
+                }
+            } else {
+                $("#flot-tooltip").remove();
+                previousPoint = null;
+            }
+        });
+
+    });
+</script>
+
+ </body>
+</html>

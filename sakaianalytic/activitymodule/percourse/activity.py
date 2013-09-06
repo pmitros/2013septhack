@@ -22,7 +22,20 @@ def histogram(mongodb, events):
                               True, 
                               False)
             print "Got a message", evt
-            
+
+@event_handler()
+def event_type_histogram(mongodb, events):
+    collection = mongodb['event_types']
+    for evt in events: 
+        event_type = evt['event_type']
+        if event_type.split('.')[0] == 'sakai': 
+            collection.update(
+                {'event_type': event_type}, 
+                {'$inc':{'count': 1}}, 
+                True, 
+                False
+            )
+
 @query()
 def plot_histogram(mongodb):
     histogram = list(mongodb['course_activity'].find())
@@ -31,7 +44,20 @@ def plot_histogram(mongodb):
     histogram.sort(lambda x,y:cmp(y['count'], x['count']))
     return histogram
 
+@query()
+def event_type_query(mongodb):
+    histogram = list(mongodb['event_types'].find())
+    histogram = [{'count' : e['count'], 
+                  'event_type' : e['event_type']} for e in histogram]
+    histogram.sort(key=lambda x: x['count'], reverse=True)
+    return histogram
+
 @view()
 def plot_histogram(query):
     from edinsights.core.render import render
     return render("courseviews.html", {'data':json.dumps(query.plot_histogram())})
+
+@view()
+def plot_event_type_histogram(query):
+    from edinsights.core.render import render
+    return render("event_types.html", {'data':json.dumps(query.event_type_query())})
