@@ -21,6 +21,8 @@ document.addEventListener('xeventtrack', function(e) {
    console.info("Event is: ", e);
    console.info("Custom data is: ", JSON.stringify(e.detail));
 });
+
+xEventTrack('video', {'pause':1, 'time':"3:47"})
 </script>
 
  </body>
