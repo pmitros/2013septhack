@@ -22,7 +22,14 @@ def histogram(mongodb, events):
                               False)
             print "Got a message", evt
             
-@view()
+@query()
 def plot_histogram(mongodb):
     histogram = list(mongodb['course_activity'].find())
-    return str(histogram)
+    histogram = [{'count' : e['count'], 
+                  'course' : e['course']} for e in histogram]
+    histogram.sort(lambda x,y:cmp(y['count'], x['count']))
+    return histogram
+
+@view()
+def plot_histogram():
+    pass
